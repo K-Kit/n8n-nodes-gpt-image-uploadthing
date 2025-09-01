@@ -82,7 +82,7 @@ export class UploadThing implements INodeType {
                 }
 
                 const buffer = await this.helpers.getBinaryDataBuffer(itemIndex, propertyName);
-                const fileName = overrideName || binaryData.fileName || 'file';
+                const fileName = overrideName || `${binaryData.fileName}.${binaryData.fileExtension}` || 'file';
 
                 const uploadThingCreds = await this.getCredentials('uploadThingApi');
                 const utapi = new UTApi({ token: String(uploadThingCreds.token) });
