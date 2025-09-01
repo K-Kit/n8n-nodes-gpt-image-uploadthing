@@ -1,0 +1,20 @@
+---
+alwaysApply: true
+---
+## Project Structure Overview
+
+This repository is an n8n community nodes package. The main entry point is `index.js` and compiled output lives in `dist/`.
+
+- Nodes are in [`nodes/`](mdc:nodes) and credentials in [`credentials/`](mdc:credentials).
+- TypeScript sources compile to `dist/` per [`tsconfig.json`](mdc:tsconfig.json).
+- Node definitions registered for n8n are declared in [`package.json`](mdc:package.json) under `n8n.nodes` and `n8n.credentials` and must reference built files in `dist/`.
+
+Key files:
+- [`index.js`](mdc:index.js): exports nodes and credentials for n8n to load.
+- [`package.json`](mdc:package.json): scripts, dev deps, and n8n metadata.
+- [`gulpfile.js`](mdc:gulpfile.js): icon build pipeline (SVG to base64) invoked by `gulp build:icons`.
+- [`tsconfig.json`](mdc:tsconfig.json): strict TS settings, output to `dist/`.
+
+Conventions:
+- Source TypeScript only under `nodes/**` and `credentials/**`.
+- Keep file/folder names stable so compiled paths match `package.json` mappings.

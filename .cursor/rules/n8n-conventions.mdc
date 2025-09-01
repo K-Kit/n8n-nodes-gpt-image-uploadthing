@@ -1,0 +1,16 @@
+---
+alwaysApply: true
+description: Conventions for building n8n nodes and credentials in this repo
+---
+## n8n Nodes & Credentials Conventions
+
+- **Folder layout**:
+  - Each node under `nodes/<NodeName>/<NodeName>.node.ts`.
+  - Credentials under `credentials/<ProviderName>Api.credentials.ts`.
+  - Shared types under `nodes/types/`.
+- **n8n metadata**: Ensure `package.json` `n8n.nodes` and `n8n.credentials` point to built JS under `dist/**` matching the source structure.
+- **Descriptions**: Keep `displayName`, `name`, `group`, `version`, `subtitle`, `description`, `defaults`, `inputs`, `outputs` accurate.
+- **Credentials usage**: Reference credential names exactly as exported by credentials classes.
+- **Testing locally**: Use `npm run build` then link into n8n or use the local test workflow per docs.
+- **Icons**: Place SVGs beside node source; `gulp build:icons` will embed as needed.
+- **Errors**: Throw `NodeOperationError` or `NodeApiError` with contextual messages.

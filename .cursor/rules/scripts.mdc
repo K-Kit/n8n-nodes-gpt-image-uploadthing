@@ -1,0 +1,12 @@
+---
+alwaysApply: true
+description: Build, lint, and publish workflow conventions for this repo
+---
+## Scripts & Workflow
+
+- **Build**: `npm run build` cleans `dist/`, compiles TypeScript, and builds icons via gulp. Ensure all node and credential entrypoints are emitted to `dist/` matching `package.json`.
+- **Dev**: `npm run dev` runs `tsc --watch` for incremental builds.
+- **Format**: `npm run format` formats `nodes` and `credentials` via Prettier.
+- **Lint**: `npm run lint` (or `lintfix`) checks/fixes via ESLint; publishing uses `.eslintrc.prepublish.js` for stricter checks.
+- **Node version**: Target Node >= 20.15 per `engines`.
+- **Publishing**: Run build and lint clean before `npm publish`. Verify README and LICENSE updated. Ensure `n8n.nodes` and `n8n.credentials` arrays reference built files.

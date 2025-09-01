@@ -1,0 +1,13 @@
+---
+globs: *.ts,*.tsx
+description: TypeScript guidance aligned with tsconfig
+---
+## TypeScript Guidance
+
+- **Strict mode**: Assume `strict: true` with `noImplicitAny`, `strictNullChecks`. Add explicit types to exported functions, node/credential descriptions, and complex objects.
+- **Module/Target**: Use CommonJS imports/exports compatible with Node 20 and `target: es2019`.
+- **Libs**: Prefer modern JS APIs available in `es2019`+.
+- **OutDir**: Do not import from `dist/`. Source files should import from `nodes/**` and `credentials/**` only.
+- **JSON imports**: Allowed via `resolveJsonModule`; prefer constants files for static data.
+- **Error handling**: With `useUnknownInCatchVariables: false`, type caught errors appropriately and narrow before access.
+- **File placement**: Keep node operations, descriptions, and helper utilities co-located under their node folder. Share cross-node types in `nodes/types`.

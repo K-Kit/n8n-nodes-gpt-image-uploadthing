@@ -1,0 +1,14 @@
+---
+alwaysApply: true
+description: Formatting and linting rules synced with .editorconfig and scripts
+---
+## Formatting & Linting
+
+- **EditorConfig**: Follow [`.editorconfig`](mdc:.editorconfig):
+  - Default: tabs, width 2; LF line endings; trim trailing whitespace; final newline.
+  - `package.json` and YAML: spaces, width 2.
+  - Markdown: keep trailing whitespace.
+- **Prettier**: Use `npm run format` to format `nodes` and `credentials`.
+- **ESLint**: Run `npm run lint` and `npm run lintfix` before commits. For publishing, the project runs a stricter config via `-c .eslintrc.prepublish.js`.
+- **Imports**: Avoid default exports for shared utilities; prefer named exports for clarity.
+- **File ordering**: Types/interfaces first, constants next, functions after. Keep exports at bottom where practical.
