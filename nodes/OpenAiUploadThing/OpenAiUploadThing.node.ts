@@ -23,11 +23,11 @@ export class OpenAiUploadThing implements INodeType {
 		usableAsTool: true,
 		credentials: [
 			{
-				name: 'openAiApi',
+				name: 'uploadThingApi',
 				required: true,
 			},
 			{
-				name: 'uploadThingApi',
+				name: 'openAiApi',
 				required: true,
 			},
 		],
@@ -111,8 +111,7 @@ export class OpenAiUploadThing implements INodeType {
 				const imageResp = await openai.images.generate({
 					model: 'gpt-image-1',
 					prompt,
-					size: typedSize,
-					response_format: 'b64_json',
+					size: typedSize
 				});
 				const b64 = imageResp?.data?.[0]?.b64_json as string | undefined;
 				if (!b64) {

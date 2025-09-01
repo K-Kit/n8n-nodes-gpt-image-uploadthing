@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-gpt-image-uploadthing",
-  "version": "0.1.2",
+  "version": "0.1.6",
   "description": "A community node package for n8n to generate images with OpenAI and upload to UploadThing",
   "keywords": [
     "n8n-community-node-package"
