@@ -25,10 +25,12 @@ export class OpenAiUploadThing implements INodeType {
 			{
 				name: 'uploadThingApi',
 				required: true,
+				displayName: 'UploadThing API',
 			},
 			{
 				name: 'openAiApi',
 				required: true,
+				displayName: 'OpenAI API',
 			},
 		],
 		properties: [
@@ -50,6 +52,7 @@ export class OpenAiUploadThing implements INodeType {
 					{ name: '1024×1024', value: '1024x1024' },
 					{ name: '1536×1024', value: '1536x1024' },
 					{ name: '1024×1536', value: '1024x1536' },
+					{ name: 'Auto', value: 'auto' },
 				],
 				default: '1024x1024',
 			},
@@ -111,7 +114,7 @@ export class OpenAiUploadThing implements INodeType {
 				const imageResp = await openai.images.generate({
 					model: 'gpt-image-1',
 					prompt,
-					size: typedSize
+					size: typedSize,
 				});
 				const b64 = imageResp?.data?.[0]?.b64_json as string | undefined;
 				if (!b64) {
