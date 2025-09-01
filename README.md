@@ -1,48 +1,83 @@
 ![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
 
-# n8n-nodes-starter
+# n8n-nodes-gpt-image-uploadthing
 
-This repo contains example nodes to help you get started building your own custom integrations for [n8n](https://n8n.io). It includes the node linter and other dependencies.
+Generate images with OpenAI and upload them to UploadThing directly from n8n.
 
-To make your custom node available to the community, you must create it as an npm package, and [submit it to the npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
+This community node adds a single node: `OpenAI → UploadThing`, which:
+- Generates an image using OpenAI’s Images API (`gpt-image-1`)
+- Uploads the resulting image to UploadThing using `UTApi`
 
-If you would like your node to be available on n8n cloud you can also [submit your node for verification](https://docs.n8n.io/integrations/creating-nodes/deploy/submit-community-nodes/).
+References:
+- UploadThing server API (UTApi, UTFile): https://docs.uploadthing.com/api-reference/server
+- OpenAI JavaScript SDK: https://www.npmjs.com/package/openai
 
 ## Prerequisites
 
-You need the following installed on your development machine:
+- Node.js ≥ 20
+- n8n installed and running
+- OpenAI API key
+- UploadThing token
 
-* [git](https://git-scm.com/downloads)
-* Node.js and npm. Minimum version Node 20. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
-* Install n8n with:
-  ```
-  npm install n8n -g
-  ```
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+## Installation
 
-## Using this starter
+Install as a community node in n8n or via npm in your n8n extensions setup:
 
-These are the basic steps for working with the starter. For detailed guidance on creating and publishing nodes, refer to the [documentation](https://docs.n8n.io/integrations/creating-nodes/).
+```
+npm install n8n-nodes-gpt-image-uploadthing
+```
 
-1. [Generate a new repository](https://github.com/n8n-io/n8n-nodes-starter/generate) from this template repository.
-2. Clone your new repo:
-   ```
-   git clone https://github.com/<your organization>/<your-repo-name>.git
-   ```
-3. Run `npm i` to install dependencies.
-4. Open the project in your editor.
-5. Browse the examples in `/nodes` and `/credentials`. Modify the examples, or replace them with your own nodes.
-6. Update the `package.json` to match your details.
-7. Run `npm run lint` to check for errors or `npm run lintfix` to automatically fix errors when possible.
-8. Test your node locally. Refer to [Run your node locally](https://docs.n8n.io/integrations/creating-nodes/test/run-node-locally/) for guidance.
-9. Replace this README with documentation for your node. Use the [README_TEMPLATE](README_TEMPLATE.md) to get started.
-10. Update the LICENSE file to use your details.
-11. [Publish](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) your package to npm.
+Restart n8n so it loads the package.
 
-## More information
+## Credentials
 
-Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building your own nodes.
+Create two credentials in n8n:
+
+1) OpenAI API
+- API Key: your OpenAI key
+
+2) UploadThing API
+- Token: your UploadThing token
+
+These correspond to the credential types exported by the package: `OpenAiApi` and `UploadThingApi`.
+
+## Usage
+
+Add the node “OpenAI → UploadThing” to your workflow and configure:
+
+- Prompt: Text prompt to generate the image.
+- Size: One of `1024×1024`, `1536×1024`, `1024×1536`.
+- File Name: Output file name (e.g. `generated.png`).
+- ACL: `public-read` or `private`.
+- Content Disposition: `inline` or `attachment`.
+
+Outputs (`json`):
+
+- fileKey: UploadThing file key
+- url: Public URL (respecting ACL)
+- name: Stored file name
+- sizeBytes: File size in bytes
+- plus the input fields for reference
+
+## Local development
+
+```
+npm i
+npm run build
+```
+
+Link or install the built `dist` into your n8n environment. Lint and format:
+
+```
+npm run lint
+npm run format
+```
+
+## Security notes
+
+- Keep your OpenAI API key and UploadThing token secret in n8n credentials.
+- If you set ACL to `private`, use signed URLs to access files as needed via UploadThing APIs.
 
 ## License
 
-[MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+MIT
