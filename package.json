@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-gpt-image-uploadthing",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A community node package for n8n to generate images with OpenAI and upload to UploadThing",
   "keywords": [
     "n8n-community-node-package"
@@ -33,15 +33,11 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js",
       "dist/credentials/OpenAiApi.credentials.js",
       "dist/credentials/UploadThingApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js",
-      "dist/nodes/OpenAIUploadThing/OpenAiUploadThing.node.js"
+      "dist/nodes/OpenAiUploadThing/OpenAiUploadThing.node.js"
     ]
   },
   "devDependencies": {
